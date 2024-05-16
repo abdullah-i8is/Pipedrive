@@ -55,7 +55,7 @@ function Gmail() {
         setSelectedItem(item);
     };
 
-    const clientId = "928209376096-51aefs784odgcc5a57766briknp57i6c.apps.googleusercontent.com";
+    const clientId = "928209376096-38u5an1f1upp4i48lpah6c5st16coc0b.apps.googleusercontent.com";
 
     const initClient = () => {
         gapi.client.init({
