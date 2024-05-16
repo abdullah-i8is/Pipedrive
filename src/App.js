@@ -5,6 +5,9 @@ import SideBar from './comp/SideBar/SideBar';
 import Gmail from './comp/Gmail';
 import Verdebooks from './comp/Verdebooks';
 import './App.css';
+import Docs from './comp/Docs';
+import SSTrack from './comp/SS-track';
+import ClickHR from './comp/ClickHR';
 
 function App() {
 
@@ -29,7 +32,10 @@ function App() {
       <SideBar items={items} setItems={setItems} icons={icons} onSelect={handleSelect} selectedItem={selectedItem} />
       <div className='content'>
         {items[0].isActive && <Gmail />}
-        {items[1].isActive && <Verdebooks />}
+        {items[1].isActive && <Docs />}
+        {items[2].isActive && <SSTrack />}
+        {items[3].isActive && <Verdebooks />}
+        {items[4].isActive && <ClickHR />}
       </div>
     </div>
   );

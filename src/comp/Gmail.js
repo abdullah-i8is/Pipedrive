@@ -26,6 +26,7 @@ function Gmail() {
     ]);
     const icons = [<AiOutlineHome size={20} />, <AiOutlineRedEnvelope size={20} />, <AiOutlineDollar size={20} />, <AiOutlineUser size={20} />, <AiOutlineProject size={20} />];
 
+    const [recipients, setRecipients] = useState([]);
     const [sendingMessage, setSendingMessage] = useState(false);
     const [emailUser, setEmailUser] = useState('');
     const [emailSubject, setEmailSubject] = useState('');
@@ -56,13 +57,14 @@ function Gmail() {
     };
 
     const clientId = "928209376096-38u5an1f1upp4i48lpah6c5st16coc0b.apps.googleusercontent.com";
+    // const clientId = "928209376096-51aefs784odgcc5a57766briknp57i6c.apps.googleusercontent.com"; for local
 
     const initClient = () => {
         gapi.client.init({
             apiKey: "AIzaSyBcyi-E1WIfj3gvWVUk6jc4erXAAgw2PFM",
             clientId: clientId,  // Ensure this is correctly set
             discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"],
-            scope: "https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email"
+            scope: "https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/contacts.readonly"
         }).then(() => {
             console.log("GAPI client initialized.");
             gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
@@ -88,15 +90,11 @@ function Gmail() {
         setSelectedEmail(email);
     };
 
-    const signIn = () => {
-        gapi.auth2.getAuthInstance().signIn({
-            prompt: 'consent'
-        }).then((res) => {
-            console.log("User signed in.", res);
-            // Optionally, you can fetch messages or perform other operations here
-        }).catch(error => {
-            console.error("Error signing in: ", error);
-        });
+    const signIn = async () => {
+        const auth2 = gapi.auth2.getAuthInstance();
+        await auth2.signIn();
+        console.log(auth2.currentUser.get().getAuthResponse().access_token);
+        localStorage.setItem("user_token", auth2.currentUser.get().getAuthResponse().access_token);
     };
 
     const signOut = () => {
@@ -150,7 +148,7 @@ function Gmail() {
             const date = headers.find(header => header.name === 'Date')?.value || "No date";
             // Extract and process the body content
             const bodyContent = extractContent2(response.result.payload);
-            console.log(bodyContent); // You might want to display this in your UI
+            // console.log(bodyContent); // You might want to display this in your UI
             let obj = {
                 id: response.result.id,
                 subject: subject,
@@ -242,6 +240,8 @@ function Gmail() {
             getMessagesDetail(messages);
         });
     };
+
+    // console.log("users ==========>", extractEmail());
 
     const getMessagesDetail = (messages) => {
         const emailsBatch = [];
@@ -379,15 +379,16 @@ function Gmail() {
         });
     }
 
-    const deleteEmail = (emailId) => {
-        gapi.client.gmail.users.messages.delete({
+    const deleteMessage = (messageId) => {
+        return gapi.client.gmail.users.messages.delete({
             'userId': 'me',
-            'id': emailId
-        }).then(function (response) {
-            console.log("Email deleted", response); // Response is usually an empty object on success
-            // Optionally update UI or state here
+            'id': messageId
+        }).then(response => {
+            console.log('Message deleted:', response);
+            // Optionally, you can refresh the list of messages after deletion
+            listMessages();
         }).catch(error => {
-            console.error("Failed to delete the email", error);
+            console.error('Error deleting message:', error);
         });
     };
 
@@ -395,10 +396,7 @@ function Gmail() {
         gapi.load('client:auth2', initClient);
     }, []);
 
-    console.log({
-        emails,
-        sendEmails
-    });
+    console.log(recipients);
 
     return (
         <div>
@@ -536,7 +534,7 @@ function Gmail() {
                             <div className="emailList__settings">
                                 <div className="emailList__settingsLeft">
                                     <input type="checkbox" />
-                                    {/* <button onClick={signOut}>Sign Out</button> */}
+                                    <button onClick={signOut}>Sign Out</button>
                                     <span className="material-icons header-icons"> arrow_drop_down </span>
                                     <span className="material-icons header-icons"
                                         onClick={() => {
@@ -592,7 +590,7 @@ function Gmail() {
                                                         </span>
                                                     </h4>
                                                 </div>
-                                                {/* <button onClick={() => deleteEmail(email.id)}>Delete</button> */}
+                                                <button onClick={() => deleteMessage(email.id)}>Delete</button>
                                                 <p className="emailRow__time">{new Date(email?.date).toLocaleDateString()}</p>
                                             </div>
                                         )
