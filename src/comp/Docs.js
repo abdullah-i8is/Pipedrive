@@ -11,7 +11,7 @@ const Docs = () => {
     const [docContent, setDocContent] = useState(''); // State to store the content of the selected document
     const [loading, setLoading] = useState(false); // State to store the content of the selected document
 
-    const clientId = "928209376096-38u5an1f1upp4i48lpah6c5st16coc0b.apps.googleusercontent.com";
+    const clientId = "928209376096-lhuj8a7e5l3080f5lbvd1epu5vef8n88.apps.googleusercontent.com";
     // const clientId = "928209376096-51aefs784odgcc5a57766briknp57i6c.apps.googleusercontent.com"; for local
 
     const apiKey = "AIzaSyBcyi-E1WIfj3gvWVUk6jc4erXAAgw2PFM";
