@@ -1,0 +1,35 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  color: white;
+  position: fixed;
+  width: 100%;
+  padding-left: 4%;
+  padding-right: 4%;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.logo {
+  color: #21232cb8;
+  margin-left: 30px;
+  font-size: 1.2em;
+}
+
+.search-bar {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+
+}
+
+.search-bar input {
+  padding: 5px;
+  font-size: 1em;
+  width: 100%;
+  max-width: 500px;
+}
