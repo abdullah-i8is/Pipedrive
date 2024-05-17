@@ -56,8 +56,8 @@ function Gmail() {
         setSelectedItem(item);
     };
 
-    const clientId = "928209376096-lhuj8a7e5l3080f5lbvd1epu5vef8n88.apps.googleusercontent.com";
-    // const clientId = "928209376096-51aefs784odgcc5a57766briknp57i6c.apps.googleusercontent.com"; for local
+    // const clientId = "928209376096-38u5an1f1upp4i48lpah6c5st16coc0b.apps.googleusercontent.com"; for live
+    const clientId = "928209376096-51aefs784odgcc5a57766briknp57i6c.apps.googleusercontent.com";
 
     const initClient = () => {
         gapi.client.init({
@@ -119,22 +119,22 @@ function Gmail() {
 
     // FOR SENT ITEMS
 
-    function listSentMessages() {
+    const listSentMessages = () => {
         const request = gapi.client.gmail.users.messages.list({
             'userId': 'me',
             'labelIds': ['SENT'],
-            'maxResults': 30  // You can adjust the number of results here
+            'maxResults': 10  // You can adjust the number of results here
         });
         request.execute((response) => {
-            console.log(response);
-            // If there are any messages, log them or process them here
+            console.log("sent items =======>", response);
             if (response.messages && response.messages.length > 0) {
-                response.messages.forEach((message) => {
-                    getMessageById(message.id) // Fetch each message's details
+                const newMessages = response.messages.filter((message) => {
+                    return !sendEmails.some(email => email.id === message.id);
                 });
+                newMessages.forEach((message) => getMessageById(message.id));
             }
         });
-    }
+    };
 
     function getMessageById(messageId) {
         gapi.client.gmail.users.messages.get({
@@ -149,15 +149,14 @@ function Gmail() {
             // Extract and process the body content
             const bodyContent = extractContent2(response.result.payload);
             // console.log(bodyContent); // You might want to display this in your UI
-            let obj = {
+            let messageObj = {
                 id: response.result.id,
                 subject: subject,
                 to: to,
                 date: date,
                 body: bodyContent
             }
-            sendEmails.push(obj)
-            setSendEmails(sendEmails)
+            setSendEmails(prevState => [...prevState, messageObj]);
             // Handle attachments if any
             if (response.result.payload.parts) {
                 response.result.payload.parts.forEach(part => {
@@ -240,8 +239,6 @@ function Gmail() {
             getMessagesDetail(messages);
         });
     };
-
-    // console.log("users ==========>", extractEmail());
 
     const getMessagesDetail = (messages) => {
         const emailsBatch = [];
@@ -396,7 +393,7 @@ function Gmail() {
         gapi.load('client:auth2', initClient);
     }, []);
 
-    console.log(recipients);
+    console.log({ emails, sendEmails });
 
     return (
         <div>
@@ -534,7 +531,7 @@ function Gmail() {
                             <div className="emailList__settings">
                                 <div className="emailList__settingsLeft">
                                     <input type="checkbox" />
-                                    <button onClick={signOut}>Sign Out</button>
+                                    {/* <button onClick={signOut}>Sign Out</button> */}
                                     <span className="material-icons header-icons"> arrow_drop_down </span>
                                     <span className="material-icons header-icons"
                                         onClick={() => {
@@ -575,6 +572,7 @@ function Gmail() {
                                     selectedEmail ? (
                                         <EmailView />
                                     ) : emails?.length > 0 ? emails?.sort((a, b) => new Date(b.date) - new Date(a.date))?.map((email) => {
+                                        const cleanString = email?.from?.replace(/<.*?>/g, '').trim();
                                         return (
                                             <div className="emailRow" onClick={() => handleEmailSelect(email)}>
                                                 <div className="emailRow__options">
@@ -582,7 +580,7 @@ function Gmail() {
                                                     <span className="material-icons"> star_border </span>
                                                     {/* <span className="material-icons"> label_important </span> */}
                                                 </div>
-                                                <h3 className="emailRow__title">{email?.from}</h3>
+                                                <h3 className="emailRow__title">{cleanString}</h3>
                                                 <div className="emailRow__message">
                                                     <h4>
                                                         <span className="emailRow__description">
@@ -590,7 +588,7 @@ function Gmail() {
                                                         </span>
                                                     </h4>
                                                 </div>
-                                                <button onClick={() => deleteMessage(email.id)}>Delete</button>
+                                                {/* <button onClick={() => deleteMessage(email.id)}>Delete</button> */}
                                                 <p className="emailRow__time">{new Date(email?.date).toLocaleDateString()}</p>
                                             </div>
                                         )
@@ -600,6 +598,7 @@ function Gmail() {
                                     selectedEmail ? (
                                         <EmailView2 />
                                     ) : sendEmails?.length > 0 ? sendEmails?.sort((a, b) => new Date(b.date) - new Date(a.date))?.map((email) => {
+                                        const cleanString = email?.to?.replace(/<.*?>/g, '').trim();
                                         return (
                                             <div className="emailRow" onClick={() => handleEmailSelect(email)}>
                                                 <div className="emailRow__options" onClick={() => handleEmailSelect(email)}>
@@ -607,7 +606,7 @@ function Gmail() {
                                                     <span className="material-icons"> star_border </span>
                                                     {/* <span className="material-icons"> label_important </span> */}
                                                 </div>
-                                                <h3 className="emailRow__title">{email?.to}</h3>
+                                                <h3 className="emailRow__title">{cleanString}</h3>
                                                 <div className="emailRow__message" onClick={() => handleEmailSelect(email)}>
                                                     <h4>
                                                         <span className="emailRow__description">

@@ -1,10 +1,13 @@
 import React from 'react';
+import logo from '../../assets/logo.svg';
 import './Header.css';
 
 const NavBar = () => {
   return (
     <nav className="navbar">
-      <div className="logo">Emails / Emails Inbox</div>
+      {/* <div className="logo"> */}
+        <img width={200} src={logo} />
+      {/* </div> */}
       <div className="search-bar">
         <input style={{
           border: "1px solid #1d1f273d",

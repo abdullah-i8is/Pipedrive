@@ -31,11 +31,11 @@ function App() {
       <NavBar />
       <SideBar items={items} setItems={setItems} icons={icons} onSelect={handleSelect} selectedItem={selectedItem} />
       <div className='content'>
-        {items[0].isActive && <Gmail />}
-        {items[1].isActive && <Docs />}
-        {items[2].isActive && <SSTrack />}
-        {items[3].isActive && <Verdebooks />}
-        {items[4].isActive && <ClickHR />}
+        {items[0].isActive === true && <Gmail />}
+        {items[1].isActive === true && <Docs />}
+        {items[2].isActive === true && <SSTrack />}
+        {items[3].isActive === true && <Verdebooks />}
+        {items[4].isActive === true && <ClickHR />}
       </div>
     </div>
   );
