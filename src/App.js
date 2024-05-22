@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Router, Routes } from 'react-router-dom';
+import { Route, Router, Routes, useParams, useSearchParams } from 'react-router-dom';
 import Layout from './layout';
 import Gmail from './comp/Gmail';
 import Docs from './comp/Docs';

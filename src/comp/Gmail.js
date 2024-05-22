@@ -14,8 +14,20 @@ import { IoClose } from "react-icons/io5";
 import { FaRegWindowMinimize } from "react-icons/fa";
 import { MdCloseFullscreen } from "react-icons/md";
 import { MdAttachEmail } from "react-icons/md";
+import { useParams, useSearchParams } from 'react-router-dom';
 
 function Gmail() {
+
+    const params = useParams()
+    const [searchParams] = useSearchParams();
+    const email = searchParams.get('email');
+    const password = searchParams.get('password');
+
+    useEffect(() => {
+        localStorage.setItem("auth_token", params.token)
+        localStorage.setItem("email", email)
+        localStorage.setItem("password", password)
+    }, [])
 
     const [items, setItems] = useState([
         { path: 'Home', isActive: false },
@@ -56,8 +68,8 @@ function Gmail() {
         setSelectedItem(item);
     };
 
-    // const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
-    const clientId = "928209376096-giumfldna5ggmfpim0iek1btcj895ssb.apps.googleusercontent.com";
+    const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
+    // const clientId = "928209376096-giumfldna5ggmfpim0iek1btcj895ssb.apps.googleusercontent.com";
 
     const initClient = () => {
         gapi.client.init({
