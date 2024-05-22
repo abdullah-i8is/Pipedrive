@@ -56,7 +56,8 @@ function Gmail() {
         setSelectedItem(item);
     };
 
-    const clientId = "928209376096-65f9k9bf8hmh0htekoslh7uc8rga7ob2.apps.googleusercontent.com";
+    // const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
+    const clientId = "928209376096-giumfldna5ggmfpim0iek1btcj895ssb.apps.googleusercontent.com";
 
     const initClient = () => {
         gapi.client.init({
@@ -124,7 +125,7 @@ function Gmail() {
             'labelIds': ['SENT'],
             'maxResults': 10  // You can adjust the number of results here
         });
-        
+
         request.execute((response) => {
             console.log("sent items =======>", response);
             if (response.messages && response.messages.length > 0) {

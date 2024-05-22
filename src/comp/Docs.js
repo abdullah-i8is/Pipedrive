@@ -8,7 +8,8 @@ const Docs = () => {
     
     const [docs, setDocs] = useState([]);
     const [loading, setLoading] = useState(false);
-    const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
+    // const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
+    const clientId = "928209376096-giumfldna5ggmfpim0iek1btcj895ssb.apps.googleusercontent.com";
     const apiKey = "AIzaSyAVnvOYTZj-MbKGhkaMG5d92dxnjklVlN0";
     const discoveryDocs = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
     const scope = "https://www.googleapis.com/auth/drive.readonly";
