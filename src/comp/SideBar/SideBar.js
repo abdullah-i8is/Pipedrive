@@ -1,12 +1,17 @@
 import React from 'react';
 import './SideBar.css';
+import { useNavigate } from 'react-router-dom';
 
 const SideBar = ({ items, setItems, icons }) => {
+
+    const navigate = useNavigate()
+
     return (
         <div className="custom-sidebar">
             {items.map((item, index) => (
                 <div key={index} className={`sidebar-item ${item.isActive ? 'selected' : ''}`}
                     onClick={() => {
+                        navigate(item.path)
                         setItems((prevItems) => {
                             return prevItems.map((item, ind) => {
                                 if (index === ind) {
@@ -22,6 +27,9 @@ const SideBar = ({ items, setItems, icons }) => {
                                 }
                             })
                         })
+                        setTimeout(() => {
+                            window.location.reload()
+                        }, 100);
                     }}>
                     {icons[index]}
                 </div>

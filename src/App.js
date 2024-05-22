@@ -1,42 +1,27 @@
-import { useEffect, useState } from 'react';
-import NavBar from './comp/Navbar/Header';
-import { AiOutlineHome, AiOutlineRedEnvelope, AiOutlineUser, AiOutlineDollar, AiOutlineProject } from "react-icons/ai";
-import SideBar from './comp/SideBar/SideBar';
+import React from 'react';
+import { Route, Router, Routes } from 'react-router-dom';
+import Layout from './layout';
 import Gmail from './comp/Gmail';
-import Verdebooks from './comp/Verdebooks';
-import './App.css';
 import Docs from './comp/Docs';
 import SSTrack from './comp/SS-track';
+import Verdebooks from './comp/Verdebooks';
 import ClickHR from './comp/ClickHR';
+import CalendarComponent from './comp/GoogleCalender';
 
-function App() {
-
-  const [items, setItems] = useState([
-    { path: 'Home', isActive: true },
-    { path: 'About', isActive: false },
-    { path: 'Services', isActive: false },
-    { path: 'Contact', isActive: false },
-    { path: 'Blog', isActive: false },
-  ]);
-  const icons = [<AiOutlineHome size={20} />, <AiOutlineRedEnvelope size={20} />, <AiOutlineDollar size={20} />, <AiOutlineUser size={20} />, <AiOutlineProject size={20} />];
-  const [selectedItem, setSelectedItem] = useState('');
-  const handleSelect = (item) => {
-    setSelectedItem(item);
-  };
-
-  console.log(items);
-
+const App = () => {
   return (
-    <div className="App">
-      <NavBar />
-      <SideBar items={items} setItems={setItems} icons={icons} onSelect={handleSelect} selectedItem={selectedItem} />
-      <div className='content'>
-        {items[0].isActive === true && <Gmail />}
-        {items[1].isActive === true && <Docs />}
-        {items[2].isActive === true && <SSTrack />}
-        {items[3].isActive === true && <Verdebooks />}
-        {items[4].isActive === true && <ClickHR />}
-      </div>
+    <div>
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route path='/' element={<Gmail />} />
+          <Route path='/:token' element={<Gmail />} />
+          <Route path='/docs' element={<Docs />} />
+          <Route path='/ss-track' element={<SSTrack />} />
+          <Route path='/verde-books' element={<Verdebooks />} />
+          <Route path='/click-HR' element={<ClickHR />} />
+          <Route path='/calender' element={<CalendarComponent />} />
+        </Route>
+      </Routes>
     </div>
   );
 }

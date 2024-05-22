@@ -56,15 +56,14 @@ function Gmail() {
         setSelectedItem(item);
     };
 
-    // const clientId = "928209376096-38u5an1f1upp4i48lpah6c5st16coc0b.apps.googleusercontent.com"; for live
-    const clientId = "928209376096-51aefs784odgcc5a57766briknp57i6c.apps.googleusercontent.com";
+    const clientId = "928209376096-65f9k9bf8hmh0htekoslh7uc8rga7ob2.apps.googleusercontent.com";
 
     const initClient = () => {
         gapi.client.init({
             apiKey: "AIzaSyBcyi-E1WIfj3gvWVUk6jc4erXAAgw2PFM",
             clientId: clientId,  // Ensure this is correctly set
             discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"],
-            scope: "https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/contacts.readonly"
+            scope: "https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/contacts.readonly https://www.googleapis.com/auth/drive.readonly"
         }).then(() => {
             console.log("GAPI client initialized.");
             gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
@@ -125,13 +124,15 @@ function Gmail() {
             'labelIds': ['SENT'],
             'maxResults': 10  // You can adjust the number of results here
         });
+        
         request.execute((response) => {
             console.log("sent items =======>", response);
             if (response.messages && response.messages.length > 0) {
-                const newMessages = response.messages.filter((message) => {
-                    return !sendEmails.some(email => email.id === message.id);
+                const seenIds = new Set();
+                const newMessages = [];
+                response.messages.forEach((message) => {
+                    getMessageById(message.id)
                 });
-                newMessages.forEach((message) => getMessageById(message.id));
             }
         });
     };

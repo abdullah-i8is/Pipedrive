@@ -5,16 +5,11 @@ import md5 from 'md5';
 import Loader2 from './Loader2';
 
 const Docs = () => {
-
+    
     const [docs, setDocs] = useState([]);
-    const [selectedDoc, setSelectedDoc] = useState(null); // State to store the selected document
-    const [docContent, setDocContent] = useState(''); // State to store the content of the selected document
-    const [loading, setLoading] = useState(false); // State to store the content of the selected document
-
-    // const clientId = "928209376096-lhuj8a7e5l3080f5lbvd1epu5vef8n88.apps.googleusercontent.com"; for live
-    const clientId = "928209376096-51aefs784odgcc5a57766briknp57i6c.apps.googleusercontent.com";
-
-    const apiKey = "AIzaSyBcyi-E1WIfj3gvWVUk6jc4erXAAgw2PFM";
+    const [loading, setLoading] = useState(false);
+    const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
+    const apiKey = "AIzaSyAVnvOYTZj-MbKGhkaMG5d92dxnjklVlN0";
     const discoveryDocs = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
     const scope = "https://www.googleapis.com/auth/drive.readonly";
 
@@ -35,11 +30,22 @@ const Docs = () => {
 
     const signIn = async () => {
         const auth2 = gapi.auth2.getAuthInstance();
-        await auth2.signIn({
-            scope: scope
+        try {
+            await auth2.signIn({
+                scope: scope
+            });
+            console.log(auth2.currentUser.get().getAuthResponse().access_token);
+            localStorage.setItem("user_token", auth2.currentUser.get().getAuthResponse().access_token);
+        } catch (error) {
+            console.error("Sign-in failed", error);
+        }
+    };
+
+    const signOut = () => {
+        const auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(() => {
+            console.log('User signed out.');
         });
-        console.log(auth2.currentUser.get().getAuthResponse().access_token);
-        localStorage.setItem("user_token", auth2.currentUser.get().getAuthResponse().access_token);
     };
 
     const updateSigninStatus = (isSignedIn) => {
@@ -53,20 +59,28 @@ const Docs = () => {
     };
 
     const listDocs = () => {
-        setLoading(true)
+        setLoading(true);
         gapi.client.drive.files.list({
             'pageSize': 10,
             'fields': "nextPageToken, files(id, name, mimeType, owners, webViewLink, createdTime, modifiedTime, description)"
-        })
-            .then((response) => {
-                setLoading(false)
-                const files = response.result.files.map(file => ({
-                    ...file,
-                    reasonSuggested: getReasonSuggested(file)
-                }));
-                console.log('Files:', files);
-                setDocs(files);
-            });
+        }).then((response) => {
+            setLoading(false);
+            const files = response.result.files.map(file => ({
+                ...file,
+                reasonSuggested: getReasonSuggested(file)
+            }));
+            console.log('Files:', files);
+            setDocs(files);
+        }, (error) => {
+            setLoading(false);
+            if (error.status === 403) {
+                console.error("Permission error: ", error);
+                signOut();
+                alert("You do not have permission to access these files. Please ensure the files are shared with you.");
+            } else {
+                console.error("Failed to list files", error);
+            }
+        });
     };
 
     const getReasonSuggested = (file) => {
@@ -112,11 +126,7 @@ const Docs = () => {
 
     return (
         <div className="container">
-            {/* <div className="header">
-                <h1>Google Drive Files</h1>
-                <button className="button" onClick={signIn}>Sign in with Google</button>
-            </div> */}
-            {docs?.length === 0 ? (
+            {loading ? (
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
@@ -138,7 +148,7 @@ const Docs = () => {
                     <tbody>
                         {docs.map((doc, index) => (
                             <tr key={index} style={{ cursor: "pointer" }} onClick={() => {
-                                window.location.href = doc.webViewLink
+                                window.location.href = doc.webViewLink;
                             }}>
                                 <td className="file-name">
                                     <img className="icon" src={getFileIcon(doc.mimeType)} alt="icon" />
