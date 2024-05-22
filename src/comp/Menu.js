@@ -92,7 +92,7 @@ function AccountMenu() {
           Settings
         </MenuItem>
         <MenuItem onClick={() => {
-            window.location.href = "https://infiniti-suite-ahad.vercel.app/index.html"
+            window.location.href = "https://infiniti-suit.vercel.app/"
         }}>
           <ListItemIcon>
             <Logout fontSize="small" />
