@@ -68,8 +68,8 @@ function Gmail() {
         setSelectedItem(item);
     };
 
-    // const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
-    const clientId = "928209376096-giumfldna5ggmfpim0iek1btcj895ssb.apps.googleusercontent.com";
+    const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
+    // const clientId = "928209376096-giumfldna5ggmfpim0iek1btcj895ssb.apps.googleusercontent.com";
 
     const initClient = () => {
         gapi.client.init({
@@ -92,6 +92,7 @@ function Gmail() {
         if (auth2.isSignedIn.get()) {
             var profile = auth2.currentUser.get().getBasicProfile();
             setCurrentUser(profile)
+            localStorage.setItem("pipedrive_user", JSON.stringify(profile))
         } else {
             console.log('Not signed in');
         }

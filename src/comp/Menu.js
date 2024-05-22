@@ -13,17 +13,24 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
 function AccountMenu() {
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const user = JSON.parse(localStorage.getItem("pipedrive_user"))
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  console.log(user);
+
   return (
     <React.Fragment>
-      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', width: 200 }}>
         <Tooltip title="Account settings">
           <IconButton
             onClick={handleClick}
@@ -33,7 +40,7 @@ function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+            <Avatar sx={{ width: 40, height: 40 }}>{user?.rV?.charAt(0) + "" + user?.uT?.charAt(0)}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -76,7 +83,7 @@ function AccountMenu() {
           <Avatar /> Profile
         </MenuItem>
         <MenuItem onClick={() => {
-            window.location.href = "https://infiniti-suit.vercel.app/"
+          window.location.href = "https://infiniti-suit.vercel.app/"
         }}>
           <ListItemIcon>
             <Logout fontSize="small" />
