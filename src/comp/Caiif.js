@@ -6,7 +6,7 @@ function Caiif() {
     const password = localStorage.getItem("password")
     return (
         <div style={{ padding: '70px 0 0 65px' }}>
-            <iframe src={`https://caiif.ca?email=${email}&password=${password}`} style={{ width: "100%", height: "100vh", overflow: "hidden !important", border: "none" }} />;
+            <iframe src={`https://caiif-committee.vercel.app/sign-in?email=${email}&password=${password}`} style={{ width: "100%", height: "100vh", overflow: "hidden !important", border: "none" }} />;
         </div>
     )
 }
