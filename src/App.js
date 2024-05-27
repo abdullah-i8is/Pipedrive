@@ -8,6 +8,7 @@ import Verdebooks from './comp/Verdebooks';
 import ClickHR from './comp/ClickHR';
 import CalendarComponent from './comp/GoogleCalender';
 import Caiif from './comp/Caiif';
+import Campaigns from './comp/Campaigns';
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path='/click HR' element={<ClickHR />} />
           <Route path='/calender' element={<CalendarComponent />} />
           <Route path='/caiif' element={<Caiif />} />
+          <Route path='/campaigns' element={<Campaigns />} />
         </Route>
       </Routes>
     </div>

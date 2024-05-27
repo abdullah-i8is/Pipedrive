@@ -23,7 +23,7 @@ const Layout = () => {
         { path: '/click HR', isActive: false },
         { path: '/calender', isActive: false },
         { path: '/caiif', isActive: false },
-        { path: '/caimpaigns', isActive: false },
+        { path: '/campaigns', isActive: false },
     ]);
 
     const icons = [
