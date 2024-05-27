@@ -6,13 +6,18 @@ import automationIcon from '../../assets/Automation.png'; // Replace with your a
 import assignmentIcon from '../../assets/Automatic_Assignment.png';
 import documentsIcon from '../../assets/Document.png';
 import importIcon from '../../assets/Import_Data.png';  // Add your three-dot icon
+
 const SideBar = ({ items, setItems, icons }) => {
+
     const navigate = useNavigate();
     const [isExtraSidebarVisible, setIsExtraSidebarVisible] = useState(false);
+    const [isExtraSidebarVisible2, setIsExtraSidebarVisible2] = useState(false);
     const [hoveredItem, setHoveredItem] = useState(null);
+    const [activeEmailLink, setEmailLink] = useState("");
 
     const toggleExtraSidebar = () => {
         setIsExtraSidebarVisible(!isExtraSidebarVisible);
+        setIsExtraSidebarVisible2(false)
     };
 
     return (
@@ -23,16 +28,21 @@ const SideBar = ({ items, setItems, icons }) => {
                         key={index}
                         className={`sidebar-item ${item.isActive ? 'selected' : ''}`}
                         onClick={() => {
+                            // if (item.path === "/gmail") {
+                            //     console.log("gmail hitting");
+                            //     setIsExtraSidebarVisible2(!isExtraSidebarVisible2)
+                            //     setIsExtraSidebarVisible(false)
+                            // }
                             if (item.path === "/home") {
                                 window.location.href = "https://infiniti-suit.vercel.app/"
                             }
-                            else {
+                            // if (item.path !== "/gmail") {
                                 navigate(item.path);
-                            }
-                            setItems(prevItems => prevItems.map((it, ind) => index === ind ? { ...it, isActive: true } : { ...it, isActive: false }));
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 100);
+                                setItems(prevItems => prevItems.map((it, ind) => index === ind ? { ...it, isActive: true } : { ...it, isActive: false }));
+                                setTimeout(() => {
+                                    window.location.reload();
+                                }, 100);
+                            // }
                         }}
                         onMouseEnter={() => setHoveredItem(index)}
                         onMouseLeave={() => setHoveredItem(null)}
@@ -66,6 +76,59 @@ const SideBar = ({ items, setItems, icons }) => {
                     <div className="option" onClick={() => navigate('/import-data')}>
                         <img src={importIcon} alt="Import Data" className="option-icon" />
                         Import Data
+                    </div>
+                </div>
+            )}
+            {isExtraSidebarVisible2 && (
+                <div className={`extra-sidebar ${isExtraSidebarVisible2 ? 'slide-in' : ''}`}>
+                    <div style={{ margin: "0 10px", marginBottom: 20 }}>
+                        <button style={{
+                            backgroundColor: "#2d8647",
+                            width: "100%",
+                            height: "40px",
+                            borderRadius: "10px",
+                            border: "none",
+                            outline: "none",
+                            cursor: "pointer",
+                            fontSize: "16px",
+                            fontWeight: "600",
+                            color: "whitesmoke",
+                        }}>New Email</button>
+                    </div>
+                    <div style={{ backgroundColor: activeEmailLink === "INBOX" ? "#e1eeff" : "" }} className="option" onClick={() => {
+                        navigate('/automations')
+                        setEmailLink("INBOX")
+                    }}>
+                        <img src={automationIcon} alt="Automations" className="option-icon" />
+                        <p style={{ fontWeight: activeEmailLink === "INBOX" ? "600" : "", color: activeEmailLink === "INBOX" ? "#0d68c5" : "black" }}>Inbox</p>
+                    </div>
+                    <div style={{ backgroundColor: activeEmailLink === "DRAFTS" ? "#e1eeff" : "" }} className="option" onClick={() => {
+                        navigate('/automatic-assignment')
+                        setEmailLink("DRAFTS")
+                    }}>
+                        <img src={assignmentIcon} alt="Automatic Assignment" className="option-icon" />
+                        <p style={{ fontWeight: activeEmailLink === "DRAFTS" ? "600" : "", color: activeEmailLink === "DRAFTS" ? "#0d68c5" : "black" }}>Drafts</p>
+                    </div>
+                    <div style={{ backgroundColor: activeEmailLink === "OUTBOX" ? "#e1eeff" : "" }} className="option" onClick={() => {
+                        navigate('/documents')
+                        setEmailLink("OUTBOX")
+                    }}>
+                        <img src={documentsIcon} alt="Documents" className="option-icon" />
+                        <p style={{ fontWeight: activeEmailLink === "OUTBOX" ? "600" : "", color: activeEmailLink === "OUTBOX" ? "#0d68c5" : "black" }}>Outbox</p>
+                    </div>
+                    <div style={{ backgroundColor: activeEmailLink === "SENT" ? "#e1eeff" : "" }} className="option" onClick={() => {
+                        navigate('/import-data')
+                        setEmailLink("SENT")
+                    }}>
+                        <img src={importIcon} alt="Import Data" className="option-icon" />
+                        <p style={{ fontWeight: activeEmailLink === "SENT" ? "600" : "", color: activeEmailLink === "SENT" ? "#0d68c5" : "black" }}>Sent</p>
+                    </div>
+                    <div style={{ backgroundColor: activeEmailLink === "ARCHIVE" ? "#e1eeff" : "" }} className="option" onClick={() => {
+                        navigate('/import-data')
+                        setEmailLink("ARCHIVE")
+                    }}>
+                        <img src={importIcon} alt="Import Data" className="option-icon" />
+                        <p style={{ fontWeight: activeEmailLink === "ARCHIVE" ? "600" : "", color: activeEmailLink === "ARCHIVE" ? "#0d68c5" : "black" }}>Archive</p>
                     </div>
                 </div>
             )}

@@ -7,8 +7,8 @@ import { gapi } from 'gapi-script';
 
 const CalendarComponent = () => {
 
-    // const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
-    const clientId = "928209376096-giumfldna5ggmfpim0iek1btcj895ssb.apps.googleusercontent.com";
+    const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
+    // const clientId = "928209376096-giumfldna5ggmfpim0iek1btcj895ssb.apps.googleusercontent.com";
     const apiKey = "AIzaSyBcyi-E1WIfj3gvWVUk6jc4erXAAgw2PFM";
     const SCOPES = 'https://www.googleapis.com/auth/calendar.readonly';
     const [events, setEvents] = useState([]);

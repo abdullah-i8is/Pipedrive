@@ -67,15 +67,58 @@
     position: fixed;
     top: 0;
     left: 65px;
-    width: 240px;
+    width: 260px;
     height: 100vh;
-    background-color: #ffffff;
-    padding: 40px 20px;
+    background-color: #f5f5f6;
+    padding: 40px 0;
     box-sizing: border-box;
     z-index: 999;
     transition: transform 0.3s ease;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     transform: translateX(-100%);
+}
+
+.extra-sidebar-2 {
+    position: fixed;
+    top: 70px;
+    left: 65px;
+    width: 260px;
+    height: calc(100vh - 70px);
+    background-color: #f5f5f6;
+    padding: 40px 0;
+    box-sizing: border-box;
+    z-index: 999;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(0);
+}
+
+.email-content {
+    margin-left: 325px;
+    padding-top: 70px;
+    height: calc(100vh - 70px);
+}
+
+.extra-sidebar-2 .option {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #333;
+}
+
+.extra-sidebar-2 .option:hover {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.extra-sidebar-2 .option-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    margin-left: 20px;
 }
 
 .slide-in {
@@ -101,4 +144,5 @@
     width: 24px;
     height: 24px;
     margin-right: 10px;
+    margin-left: 20px;
 }

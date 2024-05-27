@@ -11,7 +11,7 @@
   padding-left: 4%;
   padding-right: 4%;
   box-sizing: border-box;
-  z-index: 2;
+  z-index: 1000;
 }
 
 .logo {
