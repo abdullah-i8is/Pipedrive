@@ -445,6 +445,8 @@ function Gmail() {
             }
         };
 
+        console.log(activeEmailLink);
+
         return (
             <div>
                 <div className={`extra-sidebar-2 slide-in`}>
@@ -463,35 +465,30 @@ function Gmail() {
                         }}>New Email</button>
                     </div>
                     <div style={{ backgroundColor: activeEmailLink === "INBOX" ? "#e1eeff" : "" }} className="option" onClick={() => {
-                        navigate('/automations')
                         setEmailLink("INBOX")
                     }}>
                         <img src={automationIcon} alt="Automations" className="option-icon" />
                         <p style={{ fontWeight: activeEmailLink === "INBOX" ? "600" : "", color: activeEmailLink === "INBOX" ? "#0d68c5" : "black" }}>Inbox</p>
                     </div>
                     <div style={{ backgroundColor: activeEmailLink === "DRAFTS" ? "#e1eeff" : "" }} className="option" onClick={() => {
-                        navigate('/automatic-assignment')
                         setEmailLink("DRAFTS")
                     }}>
                         <img src={assignmentIcon} alt="Automatic Assignment" className="option-icon" />
                         <p style={{ fontWeight: activeEmailLink === "DRAFTS" ? "600" : "", color: activeEmailLink === "DRAFTS" ? "#0d68c5" : "black" }}>Drafts</p>
                     </div>
                     <div style={{ backgroundColor: activeEmailLink === "OUTBOX" ? "#e1eeff" : "" }} className="option" onClick={() => {
-                        navigate('/documents')
                         setEmailLink("OUTBOX")
                     }}>
                         <img src={documentsIcon} alt="Documents" className="option-icon" />
                         <p style={{ fontWeight: activeEmailLink === "OUTBOX" ? "600" : "", color: activeEmailLink === "OUTBOX" ? "#0d68c5" : "black" }}>Outbox</p>
                     </div>
                     <div style={{ backgroundColor: activeEmailLink === "SENT" ? "#e1eeff" : "" }} className="option" onClick={() => {
-                        navigate('/import-data')
                         setEmailLink("SENT")
                     }}>
                         <img src={importIcon} alt="Import Data" className="option-icon" />
                         <p style={{ fontWeight: activeEmailLink === "SENT" ? "600" : "", color: activeEmailLink === "SENT" ? "#0d68c5" : "black" }}>Sent</p>
                     </div>
                     <div style={{ backgroundColor: activeEmailLink === "ARCHIVE" ? "#e1eeff" : "" }} className="option" onClick={() => {
-                        navigate('/import-data')
                         setEmailLink("ARCHIVE")
                     }}>
                         <img src={importIcon} alt="Import Data" className="option-icon" />
