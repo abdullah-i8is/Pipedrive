@@ -13,7 +13,7 @@ const NavBar = () => {
   const location = useLocation()
 
   const capitalizeFirstLetter = (string) => {
-    if (!string) return '';
+    if (!string) return 'Gmail';
     string = string.startsWith('/') ? string.slice(1) : string;
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
