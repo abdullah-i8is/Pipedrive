@@ -17,9 +17,9 @@ const App = () => {
           <Route path='/' element={<Gmail />} />
           <Route path='/:token' element={<Gmail />} />
           <Route path='/docs' element={<Docs />} />
-          <Route path='/ss-track' element={<SSTrack />} />
-          <Route path='/verde-books' element={<Verdebooks />} />
-          <Route path='/click-HR' element={<ClickHR />} />
+          <Route path='/sstrack' element={<SSTrack />} />
+          <Route path='/verdebooks' element={<Verdebooks />} />
+          <Route path='/click HR' element={<ClickHR />} />
           <Route path='/calender' element={<CalendarComponent />} />
           <Route path='/caiif' element={<Caiif />} />
         </Route>

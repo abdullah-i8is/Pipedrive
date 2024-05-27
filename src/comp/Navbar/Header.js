@@ -12,20 +12,33 @@ const NavBar = () => {
   const [hoveredItem, setHoveredItem] = useState("");
   const location = useLocation()
 
+  const knownRoutes = [
+    '/gmail',
+    '/docs',
+    '/sstrack',
+    '/verdebooks',
+    '/click HR',
+    '/calender',
+    '/caiif',
+  ];
+  
   const capitalizeFirstLetter = (string) => {
     if (!string) return 'Gmail';
     string = string.startsWith('/') ? string.slice(1) : string;
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
   
-  const formattedPath = capitalizeFirstLetter(location.pathname);
-
-  console.log(hoveredItem);
+  const formattedPath = (path) => {
+    if (knownRoutes.includes(path)) {
+      return capitalizeFirstLetter(path);
+    }
+    return 'Gmail';
+  };
 
   return (
     <>
       <nav className="navbar">
-        <h1 style={{ color: "black", marginLeft:"30px", fontWeight:"500" }}>{formattedPath}</h1>
+        <h1 style={{ color: "black", marginLeft:"30px", fontWeight:"500" }}>{formattedPath(location.pathname)}</h1>
         <div className="search-bar">
           <input style={{
             border: "1px solid #1d1f273d",

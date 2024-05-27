@@ -28,21 +28,15 @@ const SideBar = ({ items, setItems, icons }) => {
                         key={index}
                         className={`sidebar-item ${item.isActive ? 'selected' : ''}`}
                         onClick={() => {
-                            // if (item.path === "/gmail") {
-                            //     console.log("gmail hitting");
-                            //     setIsExtraSidebarVisible2(!isExtraSidebarVisible2)
-                            //     setIsExtraSidebarVisible(false)
-                            // }
-                            if (item.path === "/home") {
-                                window.location.href = "https://infiniti-suit.vercel.app/"
-                            }
-                            // if (item.path !== "/gmail") {
+                            if (item.path === "/") {
+                                window.location.href = "https://infiniti-suit.vercel.app/";
+                            } else {
                                 navigate(item.path);
-                                setItems(prevItems => prevItems.map((it, ind) => index === ind ? { ...it, isActive: true } : { ...it, isActive: false }));
+                                setItems((prevItems) => prevItems.map((it, ind) => index === ind ? { ...it, isActive: true } : { ...it, isActive: false }));
                                 setTimeout(() => {
                                     window.location.reload();
                                 }, 100);
-                            // }
+                            }
                         }}
                         onMouseEnter={() => setHoveredItem(index)}
                         onMouseLeave={() => setHoveredItem(null)}

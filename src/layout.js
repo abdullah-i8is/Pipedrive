@@ -15,12 +15,12 @@ import icon9 from './assets/b.png';
 const Layout = () => {
 
     const [items, setItems] = useState([
-        { path: '/home', isActive: false },
+        { path: '/', isActive: false },
         { path: '/gmail', isActive: false },
         { path: '/docs', isActive: false },
-        { path: '/ss-track', isActive: false },
-        { path: '/verde-books', isActive: false },
-        { path: '/click-HR', isActive: false },
+        { path: '/sstrack', isActive: false },
+        { path: '/verdebooks', isActive: false },
+        { path: '/click HR', isActive: false },
         { path: '/calender', isActive: false },
         { path: '/caiif', isActive: false },
         { path: '/caimpaigns', isActive: false },
