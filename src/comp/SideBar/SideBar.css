@@ -3,21 +3,22 @@
     flex-direction: column;
     justify-content: flex-start;
     background-color: #211c52;
-
     padding: 40px 8px;
-    width: 4;
-
+    width: 65px;
+    /* Adjusted width to fit icon and tooltip */
     height: 100vh;
     position: fixed;
     top: 0;
     left: 0;
     box-sizing: border-box;
-
+    z-index: 1000;
 }
 
 .sidebar-item {
     display: flex;
     align-items: center;
+    position: relative;
+    /* To position the tooltip */
     margin: 15px 0;
     padding: 10px 10px;
     cursor: pointer;
@@ -25,22 +26,79 @@
     color: white;
 }
 
-.sidebar-item:first-child {
+/* .sidebar-item:first-child {
     margin-top: 150%;
-
-}
+} */
 
 .sidebar-item:hover {
     background-color: #6150e1;
     border-radius: 10px;
 }
 
-.sidebar-text {
-    margin-left: 10px;
-    /* Space between icon and text */
-}
-
 .sidebar-item.selected {
     background-color: #6150e1;
     border-radius: 10px;
+}
+
+.sidebar-item.three-dots img {
+    filter: invert(1);
+}
+
+.sidebar-tooltip {
+    position: absolute;
+    left: 70px;
+    /* Adjust to position the tooltip outside the sidebar */
+    white-space: nowrap;
+    background-color: #211c52;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: opacity 0.3s;
+    opacity: 0;
+}
+
+.sidebar-item:hover .sidebar-tooltip {
+    opacity: 1;
+}
+
+.extra-sidebar {
+    position: fixed;
+    top: 0;
+    left: 65px;
+    width: 240px;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    z-index: 999;
+    transition: transform 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%);
+}
+
+.slide-in {
+    transform: translateX(0);
+}
+
+.extra-sidebar .option {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #333;
+}
+
+.extra-sidebar .option:hover {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+.extra-sidebar .option-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
 }

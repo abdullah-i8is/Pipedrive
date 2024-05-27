@@ -1087,6 +1087,20 @@ tr:hover {
   background-color: #0b62da;
 }
 
-.css-yrfskm {
-  width: initial !important;
+/* calender css */
+
+.header-icon-1,
+.header-icon-2,
+.header-icon-3 {
+  padding: 10px;
+  position: relative;
+}
+
+.header-icon-1:hover,
+.header-icon-2:hover,
+.header-icon-3:hover {
+  background-color: rgb(234, 234, 234);
+  border-radius: 100%;
+  padding: 8px 10px;
+  cursor: pointer;
 }
