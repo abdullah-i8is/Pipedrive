@@ -11,11 +11,13 @@ import icon6 from './assets/calender-icon.png';
 import icon7 from './assets/caiif-icon.png';
 import icon8 from './assets/marketing.png';
 import icon9 from './assets/b.png';
+import dollar from './assets/dollar.svg';
 
 const Layout = () => {
 
     const [items, setItems] = useState([
         { path: '/', isActive: false },
+        { path: '/deals', isActive: false },
         { path: '/gmail', isActive: false },
         { path: '/docs', isActive: false },
         { path: '/sstrack', isActive: false },
@@ -28,6 +30,7 @@ const Layout = () => {
 
     const icons = [
         <img width={30} src={icon9} alt="" />,
+        <img width={30} src={dollar} alt="" />,
         <img width={30} src={icon3} alt="" />,
         <img width={30} src={icon5} alt="" />,
         <img width={30} src={icon1} alt="" />,

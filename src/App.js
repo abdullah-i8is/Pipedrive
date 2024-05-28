@@ -9,6 +9,7 @@ import ClickHR from './comp/ClickHR';
 import CalendarComponent from './comp/GoogleCalender';
 import Caiif from './comp/Caiif';
 import Campaigns from './comp/Campaigns';
+import Deals from './comp/Deals';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path='/' element={<Layout />}>
           <Route path='/' element={<Gmail />} />
           <Route path='/:token' element={<Gmail />} />
+          <Route path='/deals' element={<Deals />} />
           <Route path='/docs' element={<Docs />} />
           <Route path='/sstrack' element={<SSTrack />} />
           <Route path='/verdebooks' element={<Verdebooks />} />

@@ -1107,3 +1107,18 @@ tr:hover {
   padding: 8px 10px;
   cursor: pointer;
 }
+
+/* Deals tab css */
+
+.deals-header {
+  padding: 100px 50px 100px 100px;
+}
+
+.deals-tabs:hover {
+  cursor: pointer;
+  background-color: rgb(242, 242, 242);
+}
+
+.add-deal-button:hover {
+  background-color: rgb(29 95 47) !important;
+}
