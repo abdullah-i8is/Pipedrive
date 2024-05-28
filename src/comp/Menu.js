@@ -7,6 +7,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
 import * as React from 'react';
+import { signOut } from '../config/conf';
 
 function AccountMenu() {
 
@@ -36,7 +37,7 @@ function AccountMenu() {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 40, height: 40 }}>{user?.rV?.charAt(0) + "" + user?.uT?.charAt(0)}</Avatar>
+            <Avatar sx={{ width: 40, height: 40 }}>{user !== null && user?.rV?.charAt(0) + "" + user?.uT?.charAt(0)}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -49,6 +50,7 @@ function AccountMenu() {
         PaperProps={{
           elevation: 0,
           sx: {
+            width: 200,
             overflow: 'visible',
             filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
             mt: 1.5,
@@ -78,21 +80,17 @@ function AccountMenu() {
         <MenuItem onClick={handleClose}>
           <Avatar /> Profile
         </MenuItem>
-        <MenuItem onClick={() => {
-          window.location.href = "https://infiniti-suit.vercel.app/"
-        }}>
+        <MenuItem>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem onClick={() => signOut()}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout
-        </MenuItem>
-        <MenuItem onClick={() => {
-          // window.location.href = "https://infiniti-suit.vercel.app/"
-        }}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          settings
         </MenuItem>
       </Menu>
     </React.Fragment>

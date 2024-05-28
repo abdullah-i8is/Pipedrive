@@ -3,8 +3,8 @@
     flex-direction: column;
     justify-content: flex-start;
     background-color: #211c52;
-    padding: 40px 8px;
-    width: 65px;
+    padding: 20px 4px;
+    /* width: 65px; */
     /* Adjusted width to fit icon and tooltip */
     height: 100vh;
     position: fixed;

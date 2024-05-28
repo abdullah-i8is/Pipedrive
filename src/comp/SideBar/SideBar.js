@@ -44,7 +44,7 @@ const SideBar = ({ items, setItems, icons }) => {
                         {icons[index]}
                         {hoveredItem === index && (
                             <div className="sidebar-tooltip">
-                                {item.path.substring(1)} {/* Display text based on path */}
+                                {item?.path?.slice(1, 2).toUpperCase() + item?.path?.slice(2)} {/* Display text based on path */}
                             </div>
                         )}
                     </div>
