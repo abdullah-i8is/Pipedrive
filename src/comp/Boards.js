@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaPlus, FaRegUserCircle } from "react-icons/fa";
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import CreateTask from './CreateTask';
+import CreateTask from './CreateTask'
 
 const ItemType = 'DEAL';
 
@@ -24,6 +24,7 @@ const Boards = () => {
 
     const [open, setOpen] = useState(false);
     const [index, setIndex] = useState(null);
+    const [highlightedBoard, setHighlightedBoard] = useState(null);
 
     const handleCreateDeal = () => {
         const createdDeal = boards.map((board, ind) => {
@@ -76,7 +77,8 @@ const Boards = () => {
                     borderRadius: "6px",
                     padding: '10px',
                     cursor: "pointer",
-                    margin: "10px 0"
+                    margin: "10px 0",
+                    transition: 'background-color 0.3s ease'
                 }}
             >
                 <p style={{ fontWeight: "600", color: "black", fontSize: 20 }}>{deal?.title} Deal</p>
@@ -90,7 +92,7 @@ const Boards = () => {
     };
 
     const DroppableBoard = ({ board, index }) => {
-        const [, drop] = useDrop({
+        const [{ isOver }, drop] = useDrop({
             accept: ItemType,
             drop: (item) => {
                 const { index: fromIndex, boardIndex: fromBoardIndex } = item;
@@ -100,13 +102,18 @@ const Boards = () => {
                     item.index = board.deals.length;
                 }
             },
+            collect: (monitor) => ({
+                isOver: monitor.isOver(),
+            }),
+            hover: () => setHighlightedBoard(index)
         });
 
         return (
             <div
                 ref={drop}
                 style={{
-                    backgroundColor: "#f5f5f6",
+                    backgroundColor: isOver ? "#e0ffe0" : "#f5f5f6",
+                    transition: 'background-color 0.3s ease',
                     height: '100vh',
                     width: "100%",
                     borderRadius: "10px",
@@ -169,6 +176,7 @@ const Boards = () => {
                         key={board.id}
                         board={board}
                         index={index}
+                        isHighlighted={highlightedBoard === index}
                     />
                 ))}
             </div>
@@ -176,5 +184,6 @@ const Boards = () => {
         </DndProvider>
     );
 };
+
 
 export default Boards;
