@@ -75,8 +75,8 @@ function Gmail() {
         setSelectedItem(item);
     };
 
-    // const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
-    const clientId = "928209376096-giumfldna5ggmfpim0iek1btcj895ssb.apps.googleusercontent.com";
+    const clientId = "928209376096-euig13evhrr352f9m3cov0t8aq4o4dj7.apps.googleusercontent.com";
+    // const clientId = "928209376096-giumfldna5ggmfpim0iek1btcj895ssb.apps.googleusercontent.com";
 
     const initClient = () => {
         gapi.client.init({
@@ -607,7 +607,7 @@ function Gmail() {
                         </div>
                     ) : (
                         <>
-                            <div className="header">
+                            {/* <div className="header">
 
                                 <div className="header__left">
                                     <span className="material-icons"> menu </span>
@@ -626,7 +626,7 @@ function Gmail() {
                                     <span className="material-icons"> notifications </span>
                                     <span className="material-icons"> account_circle </span>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="main__body">
                                 <div className="sidebar">
                                     <button className="sidebar__compose" onClick={() => setOpenCompose(true)}>
@@ -674,23 +674,11 @@ function Gmail() {
                                         <span className="material-icons"> note </span>
                                         <h3>Drafts</h3>
                                     </div>
-                                    {/* <div className={`sidebarOption`}>
-                  <span className="material-icons"> expand_more </span>
-                  <h3>More</h3>
-                </div>
-                <div className="sidebar__footer">
-                  <div className="sidebar__footerIcons">
-                    <span className="material-icons"> person </span>
-                    <span className="material-icons"> duo </span>
-                    <span className="material-icons"> phone </span>
-                  </div>
-                </div> */}
                                 </div>
                                 <div className="emailList">
                                     <div className="emailList__settings">
                                         <div className="emailList__settingsLeft">
                                             <input type="checkbox" />
-                                            {/* <button onClick={signOut}>Sign Out</button> */}
                                             <span className="material-icons header-icons"> arrow_drop_down </span>
                                             <span className="material-icons header-icons"
                                                 onClick={() => {

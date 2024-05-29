@@ -438,7 +438,7 @@ body {
 
 .main__body {
   padding: 0 30px 0 70px;
-  margin-top: 15px;
+  /* margin-top: 15px; */
   display: flex;
 }
 
@@ -448,10 +448,10 @@ body {
 } */
 
 /* email list */
-/* .emailList {
-  flex: 1;
-  overflow: scroll;
-} */
+.emailList {
+  margin-top: 75px;
+  margin-left: 20px;
+}
 
 .emailList__settings {
   position: sticky;
@@ -769,7 +769,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid whitesmoke;
+  /* border-bottom: 1px solid whitesmoke; */
 }
 
 .header__left {
@@ -817,8 +817,12 @@ input {
 /* Sidebar */
 .sidebar {
   flex: 0.3;
-  max-width: 300px;
+  max-width: 260px;
   padding-right: 20px;
+  background-color: #f5f5f6;
+  box-shadow: 0 0 10px #0000001a;
+  height: 100vh;
+  margin-top: 80px;
 }
 
 .sidebar__compose {
@@ -849,7 +853,6 @@ input {
   padding: 0 10px;
   border-radius: 20px;
   cursor: pointer;
-  color: #818181;
 }
 
 .sidebarOption .material-icons {
@@ -859,8 +862,9 @@ input {
 .sidebarOption h3 {
   flex: 1;
   margin-left: 10px;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
 }
 
 .sidebarOption:hover,
