@@ -514,7 +514,7 @@ function Gmail() {
                                 onClick={handleSignIn}
                             >Connect email account</button>
                         </div>
-                        <p style={{ fontSize: "16px", color: "black" }}>Connect your email accounts to manage sales conversations in Pipedrive. Close deals faster.</p>
+                        <p style={{ fontSize: "16px", color: "black" }}>Connect your email accounts to manage sales conversations in Infiniti Suit. Close deals faster.</p>
                     </div>
                     <div style={{ backgroundColor: '#f8f8fe', padding: "50px 60px" }}>
                         <p style={{ fontSize: "25px", color: "black", marginBottom: "20px", width: "500px" }}>

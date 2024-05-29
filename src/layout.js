@@ -20,10 +20,10 @@ const Layout = () => {
         { path: '/deals', isActive: false },
         { path: '/gmail', isActive: false },
         { path: '/docs', isActive: false },
+        { path: '/calender', isActive: false },
         { path: '/sstrack', isActive: false },
         { path: '/verdebooks', isActive: false },
         { path: '/click HR', isActive: false },
-        { path: '/calender', isActive: false },
         { path: '/caiif', isActive: false },
         { path: '/campaigns', isActive: false },
     ]);
@@ -33,10 +33,10 @@ const Layout = () => {
         <img width={30} src={dollar} alt="" />,
         <img width={30} src={icon3} alt="" />,
         <img width={30} src={icon5} alt="" />,
+        <img width={30} src={icon6} alt="" />,
         <img width={30} src={icon1} alt="" />,
         <img width={30} src={icon4} alt="" />,
         <img width={30} src={icon2} alt="" />,
-        <img width={30} src={icon6} alt="" />,
         <img width={30} src={icon7} alt="" />,
         <img width={30} src={icon8} alt="" />,
     ];

@@ -13,13 +13,15 @@ const NavBar = () => {
   const location = useLocation()
 
   const knownRoutes = [
+    '/deals',
     '/gmail',
     '/docs',
+    '/calender',
     '/sstrack',
     '/verdebooks',
     '/click HR',
-    '/calender',
     '/caiif',
+    '/campaigns',
   ];
   
   const capitalizeFirstLetter = (string) => {
