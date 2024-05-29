@@ -43,6 +43,15 @@ export default function CreateTask({ open, setOpen, handleCreateDeal, dealForm, 
                         width: "100%"
                     }}>
                         <button
+                            onClick={() => {
+                                handleClose()
+                                setDealForm({
+                                    contactPerson: "",
+                                    organization: "",
+                                    title: "",
+                                    value: "",
+                                })
+                            }}
                             style={{
                                 width: "200px",
                                 display: "flex",
@@ -62,6 +71,12 @@ export default function CreateTask({ open, setOpen, handleCreateDeal, dealForm, 
                             onClick={() => {
                                 handleCreateDeal()
                                 handleClose()
+                                setDealForm({
+                                    contactPerson: "",
+                                    organization: "",
+                                    title: "",
+                                    value: "",
+                                })
                             }}
                             style={{
                                 width: "200px",
