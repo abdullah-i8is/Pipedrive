@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Router, Routes, useParams, useSearchParams } from 'react-router-dom';
+import { Navigate, Route, Router, Routes, useParams, useSearchParams } from 'react-router-dom';
 import Layout from './layout';
 import Gmail from './comp/Gmail';
 import Docs from './comp/Docs';
@@ -10,8 +10,10 @@ import CalendarComponent from './comp/GoogleCalender';
 import Caiif from './comp/Caiif';
 import Campaigns from './comp/Campaigns';
 import Deals from './comp/Deals';
+import Admin from './comp/Admin/Admin';
 
 const App = () => {
+  const role = "ADMIN";
   return (
     <div>
       <Routes>
@@ -26,6 +28,8 @@ const App = () => {
           <Route path='/calender' element={<CalendarComponent />} />
           <Route path='/caiif' element={<Caiif />} />
           <Route path='/campaigns' element={<Campaigns />} />
+          <Route path='/admin' element={role === "ADMIN" ? <Admin /> : <Navigate to="/deals" />} />
+          <Route path='*' element={<Navigate replace={true} to="/deals" />} />
         </Route>
       </Routes>
     </div>
